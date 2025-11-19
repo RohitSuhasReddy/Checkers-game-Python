@@ -38,13 +38,17 @@ class GameLogic:
             return [(1, -1), (1, 1)]
         return []
 
+    # Compatibility alias: some older code used get_all_directions
+    def get_all_directions(self, piece):
+        return self.get_allowed_directions(piece)
+
     # ---- capture detection ----
     def _has_capture_from(self, r, c):
         """Check whether piece at (r,c) has at least one capture."""
         piece = self.board[r][c]
         if piece == EMPTY:
             return False
-        for dr, dc in self.get_allowed_directions(piece):
+        for dr, dc in self.get_all_directions(piece):
             mid_r, mid_c = r + dr, c + dc
             end_r, end_c = r + 2*dr, c + 2*dc
             if self.in_bounds(mid_r, mid_c) and self.in_bounds(end_r, end_c):
