@@ -1,95 +1,114 @@
-EMPTY = ''  # Change to '.' if your board uses '.' for empty squares
-
-class GameLogic:
-    def __init__(self, board):
-        self.board = board
-
-    def is_valid_move(self, start, end, player):
-        """
-        Validates if the given move is allowed.
-        start, end are (row, col) tuples.
-        Returns (True, "reason") or (False, "reason").
-        """
-        sr, sc = start
-        er, ec = end
-
-        # Out of bounds check
-        if not (0 <= sr < len(self.board) and 0 <= sc < len(self.board[0]) and
-                0 <= er < len(self.board) and 0 <= ec < len(self.board[0])):
-            return False, "out_of_bounds"
-
-        start_piece = self.board[sr][sc]
-        dest_piece = self.board[er][ec]
-
-        if start_piece == EMPTY:
-            return False, "no_piece_at_start"
-        if dest_piece != EMPTY:
-            return False, "destination_not_empty"
-
-        # Make sure the piece belongs to the player
-        if start_piece.lower() != player.lower():
-            return False, "not_your_piece"
-
-        dr = er - sr  # row difference
-        dc = ec - sc  # column difference
-
-        # Determine forward direction
-        # Red moves UP (row decreases), Black moves DOWN (row increases)
-        forward = -1 if player.lower() == 'r' else 1
-
-        # Simple move (1 step diagonally)
-        if abs(dr) == 1 and abs(dc) == 1:
-            # Men (non-king pieces) move only forward
-            if start_piece in ('r', 'b'):
-                if dr != forward:
-                    return False, "wrong_direction_for_man"
-            return True, "simple_ok"
-
-        # Jump move (2 steps diagonally)
-        if abs(dr) == 2 and abs(dc) == 2:
-            mid_row = (sr + er) // 2
-            mid_col = (sc + ec) // 2
-            mid_piece = self.board[mid_row][mid_col]
-
-            if mid_piece == EMPTY:
-                return False, "no_piece_to_capture"
-            if mid_piece.lower() == start_piece.lower():
-                return False, "cannot_capture_own_piece"
-
-            # Direction check for men
-            if start_piece in ('r', 'b'):
-                if dr != 2 * forward:
-                    return False, "wrong_direction_for_man_capture"
-
-            return True, "capture_ok"
-
-        return False, "not_a_valid_diagonal_move"
-
-    def move_piece(self, start, end):
-        """Performs the move and removes captured piece if it's a jump."""
-        sr, sc = start
-        er, ec = end
-        piece = self.board[sr][sc]
-
-        # If it's a jump (capture), remove the middle piece
-        if abs(er - sr) == 2 and abs(ec - sc) == 2:
-            mid_row = (sr + er) // 2
-            mid_col = (sc + ec) // 2
-            self.board[mid_row][mid_col] = EMPTY  # remove captured piece
-
-        # Move the piece
-        self.board[er][ec] = piece
-        self.board[sr][sc] = EMPTY
-
-        # Promotion to king
-        if piece == 'r' and er == 0:
-            self.board[er][ec] = 'R'
-        elif piece == 'b' and er == len(self.board) - 1:
-            self.board[er][ec] = 'B'
-
-    def debug_square(self, r, c):
-        """Helper to print what's on a square (for debugging)."""
-        if 0 <= r < len(self.board) and 0 <= c < len(self.board[0]):
-            print(f"DEBUG ({r},{c}) = {repr(self.board[r][c])}")
+class gamelogicin :
+    def __init__(self,board,current_player):
+        self.board=board
+        self.current_player=current_player
+    def is_own_piece(self,row,col):
+        piece = self.board[row][col]
+        if piece == ".":
+            return False
+        if self.current_player == "r":
+            return piece in ["r","R"]
+        # r = red piece , R = Red king
         else:
-            print(f"DEBUG ({r},{c}) is out of bounds")
+            return piece in ["b","B"]
+        # b = balck piece , B = Black king
+    def get_allowed_directions(self,piece):
+        if piece in ["R","B"]:
+            return [(1,1),(1,-1),(-1,1),(-1,-1)]
+        if piece=="r":
+            return [(-1,-1),(-1,1)]
+        if piece=="b":
+            return [(1,-1),(1,1)]
+    def get_all_captures(self):
+        capture=[]
+        for row in range(8):
+            for col in range(8):
+                if not self.is_own_piece(row,col):
+                    continue
+                piece = self.board[row][col]
+                if self.has_capture_from(row,col,piece):
+                    capture.append((row,col))
+        return capture
+    def _has_capture_from(self,r,c,piece):
+        directions = self.get_all_directions(piece)
+        for dr , dc in directions:
+            mid_r = r+dr
+            mid_c = c+dc
+            end_r = r + 2*dr
+            end_c = c + 2*dc
+            if 0 <= mid_r < 8 and 0 <= mid_c < 8 and 0 <= end_r < 8 and 0 <= end_c < 8:
+                middle_piece = self.board[mid_r][mid_c]
+                destination = self.board[end_r][end_c]
+                if self.is_opponent_piece(middle_piece) and destination == ".":
+                    return True
+        return False
+    def _is_opponent_player(self,piece):
+        if piece == ".":
+            return False
+        if self.current_player == "r":
+            return piece in ["b","B"]
+        else:
+            return piece in ["r","R"]
+    def is_vaild_normal_move(self,sr,sc,er,ec):
+        if self.board[er][ec] != ".":
+            return False
+        piece= self.board[sr][sc]
+        directions = self.get_allowed_directions(piece)
+        for dr,dc in directions:
+            if er==sr+dr and ec==sc+dc:
+                return True
+        return False
+    def is_valid_capture_move(self,sr,sc,er,ec):
+        piece = self.board[sr][sc]
+        directions = self.get_allowed_directions(piece)
+        for dr , dc in directions:
+            mid_r = sr+dr
+            mid_c = sc+dc
+            end_r = sr + 2* dr
+            end_c = sc + 2* dc
+            if er==end_r and ec==end_c:
+                if(0 <= mid_r < 8 and 0 <= mid_c <8 and self._is_opponent_piece(self.board[mid_r][mid_c]) and self.board[er][ec]=="."):
+                    return True
+        return False
+    def apply_normal_move(self,sr,sc,er,ec):
+        piece = self.board[sr][sc]
+        self.board[sr][sc]= "."
+        self.board[er][ec]= piece
+    def apply_capture_move(self,sr,sc,er,ec):
+        piece= self.board[sr][sc]
+        dr = (er - sr ) //  2
+        dc = (ec - sc ) // 2
+        mid_r = sr + dr
+        mid_c = sc + dc
+        self.board[mid_r][mid_c]="."
+        self.board[sr][sc]="."
+        self.board[er][ec]=piece
+    def has_more_captures(self, r, c):
+        piece = self.board[r][c]
+        return self._has_capture_from(r, c, piece)
+    def promote_to_king(self, r, c):
+        piece = self.board[r][c]
+        if piece == "r" and r == 0:
+            self.board[r][c] = "R"
+        elif piece == "b" and r == 7:
+            self.board[r][c] = "B"
+    def process_move(self, sr, sc, er, ec):
+        if not self.is_own_piece(sr, sc):
+            return False, "Not your piece"
+        piece = self.board[sr][sc]
+        mandatory_captures = self.get_all_captures()
+        if mandatory_captures and (sr, sc) not in mandatory_captures:
+            return False, "You must capture!"
+        if self.is_valid_capture_move(sr, sc, er, ec):
+            self.apply_capture_move(sr, sc, er, ec)
+            if self.has_more_captures(er, ec):
+                return True, "Continue capturing"
+        elif not mandatory_captures and self.is_valid_normal_move(sr, sc, er, ec):
+            self.apply_normal_move(sr, sc, er, ec)
+        else:
+            return False, "Invalid move"
+        self.promote_to_king(er, ec)
+        self.switch_player()
+        return True, "Move successful"
+    def switch_player(self):
+        self.current_player = "b" if self.current_player == "r" else "r"
