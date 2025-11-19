@@ -83,4 +83,3 @@ class gamelogicin :
         self.board[mid_r][mid_c]="."
         self.board[sr][sc]="."
         self.board[er][ec]=piece
-        #Commit chNGES
