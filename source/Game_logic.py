@@ -4,13 +4,13 @@ class GameLogic:
         self.board = board
         self.current_player = current_player  # 'r' or 'b'
     def is_inside(self, r, c):
-        return 0 <= r < 8 and 0 <= c < 8
+        return 0 <= r < 8 and 0 <= c < 8 #setting limits to rows and coloums(r=rows,c=coloums)
     def is_own_piece(self, r, c, player=None):
         if player is None:
             player = self.current_player
-        if not self.is_inside(r, c):
+        if not self.is_inside(r, c): #returning false for position outside board
             return False
-        piece = self.board[r][c]
+        piece = self.board[r][c] #assigning position to piece
         if piece == EMPTY:
             return False
         return piece.lower() == player.lower()
@@ -107,7 +107,6 @@ class GameLogic:
         self.board[mid_r][mid_c] = EMPTY
         self.board[sr][sc] = EMPTY
         self.board[er][ec] = piece
-        self.promote_to_king(er, ec)
     def has_more_captures(self, r, c):
         return self._has_capture_from(r, c)
     def promote_to_king(self, r, c):
@@ -150,6 +149,7 @@ class GameLogic:
             self.apply_capture_move(sr, sc, er, ec)
             if self.has_more_captures(er, ec):
                 return True, "Continue capturing", self.current_player
+            self.promote_to_king(er, ec)
         else:
             if not self.is_valid_normal_move(sr, sc, er, ec):
                 return False, "Invalid move", self.current_player
