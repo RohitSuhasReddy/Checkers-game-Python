@@ -127,12 +127,20 @@ def menu_display():
 
 
 def user_choice():
-    while(2>1):
-        Response=int(input("Enter your Choice...."))
-        if(Response>5 or Response <1):
+    while True:
+        Response = input("Enter your Choice.... ")
+
+        if not Response.isdigit():   # check for letters, symbols, empty input
             print(f"{Color.RED}INVALID INPUT! Enter a number between 1-5{Color.RESET}")
-        else:
+            continue
+
+        Response = int(Response)
+
+        if 1 <= Response <= 5:
             return Response
+        else:
+            print(f"{Color.RED}INVALID INPUT! Enter a number between 1-5{Color.RESET}")
+
 
 
 #This will integrate everything in the menu.py and will help me in the main.py
