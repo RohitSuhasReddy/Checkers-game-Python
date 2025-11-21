@@ -21,6 +21,40 @@ class GameLogic:
         if piece == EMPTY:
             return False
         return piece.lower() != player.lower()
+    
+    def is_valid_move(self, start, end, player=None):
+    # start, end are tuples (sr, sc), (er, ec)
+        sr, sc = start
+        er, ec = end
+
+        if player is None:
+            player = self.current_player
+
+        # out-of-bounds
+        if not (self.is_inside(sr, sc) and self.is_inside(er, ec)):
+            return False, "out_of_bounds"
+
+        # must own piece
+        if not self.is_own_piece(sr, sc, player):
+            return False, "not_your_piece"
+
+        # mandatory capture rule
+        captures = self.get_all_captures()
+        if (sr, sc) in captures:
+            if (er, ec) in captures[(sr, sc)]:
+                return True, "valid_capture"
+            return False, "must_capture"
+
+        # normal move when no captures exist
+        if self.is_valid_normal_move(sr, sc, er, ec):
+            return True, "valid_normal"
+
+        # otherwise invalid
+        return False, "invalid_move"
+
+
+
+
     def get_allowed_directions(self, piece):
         if piece in ("R", "B"):  # kings
             return [(-1, -1), (-1, 1), (1, -1), (1, 1)]
