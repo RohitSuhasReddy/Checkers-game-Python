@@ -2,19 +2,19 @@ EMPTY = "."   # empty square
 
 class Board:
     def __init__(self):
-        # Build an 8x8 character board
+        # Build an 8x8 checkers board
         self.board = [[EMPTY for _ in range(8)] for _ in range(8)]
         self.create_initial_board()
 
     # ------------------------------------------------------------
     # INITIAL SETUP
     # ------------------------------------------------------------
-    
+
     def create_initial_board(self):
         """
-        r = red man
+        r = red piece
         R = red king
-        b = black man
+        b = black piece
         B = black king
         . = empty
         """
@@ -23,9 +23,9 @@ class Board:
             for col in range(8):
                 if (row + col) % 2 == 1:      # playable dark squares
                     if row < 3:
-                        self.board[row][col] = "b"    # black man
+                        self.board[row][col] = "b"    # black piece
                     elif row > 4:
-                        self.board[row][col] = "r"    # red man
+                        self.board[row][col] = "r"    # red piece
                     else:
                         self.board[row][col] = EMPTY
                 else:
@@ -36,7 +36,7 @@ class Board:
     # ------------------------------------------------------------
     def print_board(self):
         print("\n      1   2   3   4   5   6   7   8")
-        print("    ---------------------------------")
+        print("    ----------------------------------------")
 
         for row in range(8):
             print(f" {row+1} |", end=" ")
