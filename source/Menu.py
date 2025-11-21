@@ -89,7 +89,10 @@ def print_footer():
 """
     print(footer)
 
+#This will print the Thankyou!! Msg upon exiting.
+
 def print_thankyou():
+    clear_screen()
     thankyou=r"""
             ___________.__                   __                       ._._.
             \__    ___/|  |__ _____    ____ |  | _____.__. ____  __ __| | |
@@ -98,7 +101,12 @@ def print_thankyou():
               |____|   |___|  (____  /___|  /__|_ \/ ____|\____/|____/ ____
                         \/     \/     \/     \/\/                  \/\/
 """
+    print(f"{Color.GREEN}==================================================================================================================={Color.RESET}")
     print(thankyou)
+    print(f"{Color.GREEN}==================================================================================================================={Color.RESET}")
+
+
+#This menu_display() is for printing the menu template.
 
 def menu_display():
     clear_screen()
@@ -115,33 +123,26 @@ def menu_display():
     print(f"{Color.GREEN}==================================================================================================================={Color.RESET}")
 
 
+#This user_choice() is for the validation of the user inputs and matching the options.
+
+
 def user_choice():
     while(2>1):
         Response=int(input("Enter your Choice...."))
         if(Response>5 or Response <1):
-            print(f"{Color.RED}INVALID MOVE! Enter a number between 1-5{Color.RESET}")
+            print(f"{Color.RED}INVALID INPUT! Enter a number between 1-5{Color.RESET}")
         else:
             return Response
 
-def menu_main():
-    while(2>1):
-        menu_display()
-        choice=user_choice()
-        if(choice==1):
-            return 1
-        elif(choice==2):
-            return 2
-        elif(choice==3):
-            how_to_play()
-        elif(choice==4):
-            credits()
-        elif(choice==5):
-            clear_screen()
-            print(f"{Color.GREEN}==================================================================================================================={Color.RESET}")
-            print_thankyou()
-            print(f"{Color.GREEN}==================================================================================================================={Color.RESET}")
-            exit()
 
+#This will integrate everything in the menu.py and will help me in the main.py
+
+def menu_main():
+    clear_screen()
+    menu_display()
+    choice=user_choice()
+    return choice
+     
 
 
 
