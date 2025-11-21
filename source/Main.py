@@ -17,6 +17,7 @@ def start_new_game():
     board_obj = Board()
     logic = GameLogic(board_obj.board)
     current_player = "r"     # Red always starts
+    clear_screen()
 
     print(f"{Color.CYAN}\n===================== NEW GAME STARTED ====================={Color.RESET}")
     board_obj.print_board()
@@ -62,6 +63,7 @@ def load_save_game():
 
     logic = GameLogic(board_obj.board)
     current_player = player
+    clear_screen()
 
     print(f"{Color.GREEN}\n========================== SAVED GAME LOADED =========================={Color.RESET}")
     board_obj.print_board()
