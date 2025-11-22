@@ -1,9 +1,9 @@
 . b . b . b . b
-b . b . b . b .
-. b . b . b . b
+. . . . b . b .
+. . . . . b . b
 . . . . . . . .
-. r . . . . . .
-. . r . r . r .
-. r . r . r . r
+. . . . . . . .
+. . b . . . r .
+. r . r . . . r
 r . r . r . r .
-TURN b
+TURN r
