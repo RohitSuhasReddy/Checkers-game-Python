@@ -1,9 +1,9 @@
 # Checkers in CLI
 
-##Description:
+## **Description:**
 This project is a fully functional **Standard Checkers Game** which fully runs on CLI built using Python
 
-###The Game Features:
+### The Game Features:
 -An 8X8 ASCII rendered board
 -Complete Move Validating System
 -Mandatory Capture System
@@ -17,16 +17,16 @@ The Project is modular with seperate  -Board Handling
                                       -Menu UI
                                       -Main Integration
 
-#**Files Structure:**
+# **Files Structure:**
 
-   ##Source(Folder):
+   ## Source(Folder):
          board.py
          Game_logic.py
          File_manager.py
          Menu.py
          Main.py
 
-#**Rules:**
+# **Rules:**
 1. **Pieces & Colors:**
 - You will play as either RED or BLACK.
 - Normal pieces can only move forward diagonally.
@@ -58,7 +58,7 @@ The Project is modular with seperate  -Board Handling
 
 The player with remaining movable pieces wins.
 
-#**Credits:**
+# **Credits:**
 Developed by:
           -(P1) K.Nitheesh: Board
           -(P2) B.Rahul:  Game Logic
