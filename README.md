@@ -59,11 +59,11 @@ The Project is modular with seperate  -Board Handling
 The player with remaining movable pieces wins.
 
 # **Credits:**
-Developed by:
-          -(P1) K.Nitheesh: Board
-          -(P2) B.Rahul:  Game Logic
-          -(P3) Mayank: File Manager
-          -(P4) S.Rohit: Integration and Menu System and Documentation
+## **Developed by:**
+            -(P1) K.Nitheesh: Board
+            -(P2) B.Rahul:  Game Logic
+            -(P3) Mayank: File Manager
+            -(P4) S.Rohit: Integration and Menu System and Documentation
 
 
 
