@@ -59,10 +59,10 @@ The Project is modular with seperate  -Board Handling
 The player with remaining movable pieces wins.
 
 # **Instructions/Notes:**
-1.Download the project using GIT link.
-2.Open the Source folder(Always run the game from inside this folder only).
-3. **VERY IMPORTANT!! Do not Rename the files.**
-4.Run the game from main.py 
+    1.Download the project using GIT link.
+    2.Open the Source folder(Always run the game from inside this folder only).
+    3. **VERY IMPORTANT!! Do not Rename the files.**
+    4.Run the game from main.py 
 
 # **Credits:**
 ## **Developed by:**
