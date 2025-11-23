@@ -1,4 +1,4 @@
-EMPTY = "."   # empty square
+EMPTY = " "   # empty square
 
 class Board:
     def __init__(self):
