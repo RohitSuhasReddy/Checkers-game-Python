@@ -22,8 +22,9 @@ def user_move():
 
 def start_new_game():
     board_obj = Board()
-    logic = GameLogic(board_obj.board)
-    current_player = 'r'   #Always Red starts the 1st 
+    current_player = 'r'
+    logic = GameLogic(board_obj.board, current_player)
+
     clear_screen()
 
     #Enables saving
@@ -51,7 +52,7 @@ def start_new_game():
             if loaded_board:
                 board_obj.board = loaded_board
                 current_player = loaded_turn
-                logic = GameLogic(board_obj.board)  #Re-Create logic with loaded board
+                logic = GameLogic(board_obj.board, current_player)
                 print("Loaded board. Continuing...")
                 board_obj.print_board()
             else:
@@ -98,20 +99,7 @@ def start_new_game():
             input("Press ENTER to return to menu...")
             break
 
-def load_saved_game():
-    clear_screen()
-    print(f"{Color.CYAN}\n===================== SAVED GAME LOADED ====================={Color.RESET}")
 
-    board_obj = Board()
-    fm = FileManager(board_obj)
-    loaded_board, current_player = fm.load_game()
-
-    board_obj.board = loaded_board
-
-    board_obj.print_board()
-    print(f"\n{Color.BLUE}Player {current_player.upper()}'s turn{Color.RESET}")
-
-    return board_obj, current_player
 
 
 def load_save_game():
@@ -125,7 +113,7 @@ def load_save_game():
         return
     board_obj.board = loaded_board
     current_player = loaded_turn
-    logic = GameLogic(board_obj.board)
+    logic = GameLogic(board_obj.board, current_player)
     clear_screen()
     print(f"{Color.CYAN}\n==================== SAVED GAME LOADED ===================={Color.RESET}")
     board_obj.print_board()
