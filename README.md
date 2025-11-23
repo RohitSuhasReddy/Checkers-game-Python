@@ -33,7 +33,7 @@ The Project is modular with seperate  -Board Handling
 - When a piece reaches the last row on the opponents side, 
   it becomes a KING and can move in both directions.
 
-2.** How Movement Works:**
+2. **How Movement Works:**
 - Moves are diagonal only.
 - A normal move is one step into an empty diagonal square.
 - Example of a simple move:
