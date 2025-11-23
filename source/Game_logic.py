@@ -140,7 +140,7 @@ class GameLogic:
                             piece_moves.append((er, ec))
                     if piece_moves:
                         captures[(r, c)] = piece_moves
-        return capture
+        return captures
     def apply_normal_move(self, sr, sc, er, ec):
         # Execute a simple step move on the board
         piece = self.board[sr][sc]
