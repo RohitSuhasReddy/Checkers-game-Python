@@ -24,8 +24,8 @@ def credits():
           Developed by:
           -(P1) K.Nitheesh: Board.
           -(P2) B.Rahul:  Game Logic.
-          -(P3) Mayank: File Manager and Documentation.
-          -(P4) S.Rohit: Integration and Menu System.
+          -(P3) Mayank: File Manager.
+          -(P4) S.Rohit: Integration and Menu System and Documentation.
 {Color.RESET}""")
     print("\n")
     print(f"{Color.GREEN}==================================================================================================================={Color.RESET}")
