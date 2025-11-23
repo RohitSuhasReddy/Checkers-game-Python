@@ -1,8 +1,8 @@
-EMPTY = "."   # empty square
+EMPTY = " "   # empty square
 
 class Board:
     def __init__(self):
-        # Build an 8x8 character board
+        #  To build an 8x8 checker board
         self.board = [[EMPTY for _ in range(8)] for _ in range(8)]
         self.create_initial_board()
 
@@ -13,7 +13,7 @@ class Board:
         R = red king
         b = black man
         B = black king
-        . = empty
+          = empty
         """
 
         for row in range(8):
