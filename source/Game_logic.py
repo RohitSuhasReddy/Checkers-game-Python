@@ -1,4 +1,4 @@
-EMPTY = "."
+EMPTY = "." #represting empty space
 
 class GameLogic:
     def __init__(self, board, current_player='r'):
