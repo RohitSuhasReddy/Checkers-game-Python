@@ -6,9 +6,6 @@ class Board:
         self.board = [[EMPTY for _ in range(8)] for _ in range(8)]
         self.create_initial_board()
 
-    # ------------------------------------------------------------
-    # INITIAL SETUP
-    # ------------------------------------------------------------
     
     def create_initial_board(self):
         """
@@ -35,7 +32,7 @@ class Board:
     # ASCII BOARD PRINTER
     # ------------------------------------------------------------
     def print_board(self):
-        print("\n      1   2   3   4   5   6   7   8")
+        print("\n     1   2   3   4   5   6   7   8")
         print("    ---------------------------------")
 
         for row in range(8):
