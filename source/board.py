@@ -28,9 +28,6 @@ class Board:
                 else:
                     self.board[row][col] = EMPTY
 
-    # ------------------------------------------------------------
-    # ASCII BOARD PRINTER
-    # ------------------------------------------------------------
     def print_board(self):
         print("\n     1   2   3   4   5   6   7   8")
         print("    ---------------------------------")
@@ -41,27 +38,21 @@ class Board:
                 print(self.board[row][col], end=" | ")
             print("\n    ---------------------------------")
 
-    # ------------------------------------------------------------
-    # GET / SET PIECES (used by P2 logic)
-    # ------------------------------------------------------------
+
     def get_piece(self, row, col):
         return self.board[row][col]
 
     def set_piece(self, row, col, value):
         self.board[row][col] = value
 
-    # ------------------------------------------------------------
-    # SAVE GAME (character based, compatible with P2)
-    # ------------------------------------------------------------
+
     def save_board(self, filename="savefile.txt"):
         with open(filename, "w") as f:
             for row in self.board:
                 f.write(" ".join(row) + "\n")
         print(f"Board saved to {filename}")
 
-    # ------------------------------------------------------------
-    # LOAD GAME
-    # ------------------------------------------------------------
+
     def load_board(self, filename="savefile.txt"):
         with open(filename, "r") as f:
             rows = f.read().strip().split("\n")
