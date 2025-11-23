@@ -1,5 +1,5 @@
 # Checkers in CLI
-
+                                                                                                        
 ## **Description:**
 This project is a fully functional **Standard Checkers Game** which fully runs on CLI built using Python
 
@@ -20,11 +20,11 @@ The Project is modular with seperate  -Board Handling
 # **Files Structure:**
 
    ## Source(Folder):
-         board.py
-         Game_logic.py
-         File_manager.py
-         Menu.py
-         Main.py
+         board.py-->Board rendering.
+         Game_logic.py-->Movement, captures, rules(Logic Engine).
+         File_manager.py-->Saving and loading.
+         Menu.py-->UI, color codes.
+         Main.py-->Integration, Game loop.
 
 # **Rules:**
 1. **Pieces & Colors:**
@@ -57,6 +57,12 @@ The Project is modular with seperate  -Board Handling
 - One player has no legal moves available.
 
 The player with remaining movable pieces wins.
+
+# **Instructions/Notes:**
+1.Download the project using GIT link.
+2.Open the Source folder(Always run the game from inside this folder only).
+3. **VERY IMPORTANT!! Do not Rename the files.**
+4.Run the game from main.py 
 
 # **Credits:**
 ## **Developed by:**
