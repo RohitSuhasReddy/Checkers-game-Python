@@ -1,7 +1,7 @@
 from board import Board
 from Game_logic import GameLogic
 from File_manager import FileManager
-from Menu import menu_display, menu_main, user_choice, clear_screen, Color, how_to_play, credits, print_thankyou
+from Menu import menu_main, clear_screen, Color, how_to_play, credits, print_thankyou
 
 #1.Takes the input
 #2.If it is S or s then returns save
