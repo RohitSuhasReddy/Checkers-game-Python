@@ -22,9 +22,9 @@ class Board:
                 # -*-check whether the square is playable or not.-*-
                 if (row + col) % 2 == 1:      # -*-playable squares if (row+col = odd)-*-
                     if row < 3:
-                        self.board[row][col] = "b"    # black man
+                        self.board[row][col] = "b"    # black coin
                     elif row > 4:
-                        self.board[row][col] = "r"    # red man
+                        self.board[row][col] = "r"    # red coin
                     else:
                         self.board[row][col] = EMPTY
 
