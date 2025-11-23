@@ -1,4 +1,4 @@
-EMPTY = "."
+EMPTY = " "
 class GameLogic:
     def __init__(self, board, current_player='r'):
         # Store the 8x8 board and track whose turn it is ('r' or 'b')
