@@ -1,6 +1,6 @@
 import os
 
-class Color:
+class Color:                   
     BLUE = "\033[94m"
     GREEN = "\033[92m"
     YELLOW = "\033[93m"
@@ -10,11 +10,15 @@ class Color:
     RESET = "\033[0m"
 
 def clear_screen():
-    os.system('cls' if os.name == 'nt' else 'clear')
+    if (os.name=="nt"):   #If it is Windows then the cmd is cls
+        ans="cls"
+    else:
+        ans="clear"       #If it is Mac or Linux then cmd is clear
+    os.system(ans)
 
 def credits():
     clear_screen()
-    print(f"{Color.GREEN}==============================================CREDITS============================================================{Color.RESET}")
+    print(f"{Color.GREEN}==============================================CREDITS============================================================={Color.RESET}")
     print(f"""{Color.BLUE}
     Checkers(CLI Edition)
           Developed by:
@@ -127,16 +131,16 @@ def menu_display():
 
 
 def user_choice():
-    while True:
-        Response = input("Enter your Choice.... ")
+    while(2>1):
+        Response = input("Enter your Choice.... ")      #If this was directly int, when the input was not a number then the game would crash there itself.
 
-        if not Response.isdigit():   # check for letters, symbols, empty input
+        if(Response.isdigit()==False):   # check for letters, symbols, empty input
             print(f"{Color.RED}INVALID INPUT! Enter a number between 1-5{Color.RESET}")
             continue
 
-        Response = int(Response)
+        Response = int(Response)      #If it has passed the abv test then typecast it as integer.
 
-        if 1 <= Response <= 5:
+        if 1 <= Response <= 5:        #Checking the range
             return Response
         else:
             print(f"{Color.RED}INVALID INPUT! Enter a number between 1-5{Color.RESET}")

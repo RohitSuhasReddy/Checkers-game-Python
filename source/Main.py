@@ -5,14 +5,14 @@ from Menu import menu_display, menu_main, user_choice, clear_screen, Color, how_
 
 
 def user_move():
-    while True:
+    while(2>1):
         raw = input("Your move (r1 c1 r2 c2) or 's' to save or 'l' to load: ").strip()
-        if raw.lower() == 's':
+        if (raw.lower() == 's'):
             return 'save'
-        if raw.lower() == 'l':
+        if (raw.lower() == 'l'):
             return 'load'
         parts = raw.split()
-        if len(parts) != 4 or not all(p.isdigit() for p in parts):
+        if (len(parts) != 4 or not all(p.isdigit() for p in parts)):
             print(f"{Color.RED}INVALID INPUT! Enter 4 numbers like: 6 1 5 2{Color.RESET}")
             continue
         r1, c1, r2, c2 = map(int, parts)
@@ -194,7 +194,7 @@ def main_module():
             print_thankyou()
             break
 
-if __name__ == "__main__":
+if __name__ == "__main__":      
     main_module()
 
         
