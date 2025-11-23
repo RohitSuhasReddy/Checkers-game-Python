@@ -1,23 +1,26 @@
 class FileManager:
     def __init__(self, board_obj=None, current_player='r'):
+        #storing board and player turn inside the object
         self.board_obj = board_obj
         self.current_player = current_player
-
+#function to save the game data into a file
     def save_game(self, filename="checkers_save.txt"):
         try:
             with open(filename, "w") as f:
+                #writing all 8 rows of the board
                 for r in range(8):
                     f.write(" ".join(self.board_obj.board[r]) + "\n")
                 f.write("TURN " + self.current_player + "\n")
             print("Game saved successfully!")
         except Exception as e:
             print("Error saving game:", e)
+#function to load saved game from the file
 
     def load_game(self, filename="checkers_save.txt"):
         try:
             with open(filename, "r") as f:
                 lines = f.read().strip().split("\n")
-            new_board = []
+            new_board = [] #empty list to store board rows
             for r in range(8):
                 row = lines[r].split()
                 new_board.append(row)

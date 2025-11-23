@@ -22,10 +22,10 @@ def credits():
     print(f"""{Color.BLUE}
     Checkers(CLI Edition)
           Developed by:
-          -(P1) K.Nitheesh: Board
-          -(P2) B.Rahul:  Game Logic
-          -(P3) Mayank: File Manager
-          -(P4) S.Rohit: Integration and Menu System and Documentation
+          -(P1) K.Nitheesh: Board.
+          -(P2) B.Rahul:  Game Logic.
+          -(P3) Mayank: File Manager.
+          -(P4) S.Rohit: Integration and Menu System and Documentation.
 {Color.RESET}""")
     print("\n")
     print(f"{Color.GREEN}==================================================================================================================={Color.RESET}")
