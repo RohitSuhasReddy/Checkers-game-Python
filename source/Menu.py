@@ -13,7 +13,7 @@ def clear_screen():
     if (os.name=="nt"):   #If it is Windows then the cmd is cls
         ans="cls"
     else:
-        ans="clear"       #If it is Mac or Linux then cmd is clear
+        ans="clear"       #If it is Mac OS or Linux then cmd is clear
     os.system(ans)
 
 def credits():

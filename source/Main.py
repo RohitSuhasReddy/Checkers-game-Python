@@ -3,6 +3,11 @@ from Game_logic import GameLogic
 from File_manager import FileManager
 from Menu import menu_display, menu_main, user_choice, clear_screen, Color, how_to_play, credits, print_thankyou
 
+#1.Takes the input
+#2.If it is S or s then returns save
+#3.If it is L or l then return load
+#4.Checks the coordinates input
+
 
 def user_move():
     while(2>1):
@@ -18,7 +23,10 @@ def user_move():
         r1, c1, r2, c2 = map(int, parts)
         return (r1 - 1, c1 - 1), (r2 - 1, c2 - 1)
 
-
+#1.Clears the screen
+#2.Creates a new fresh board
+#3.Sets the player turn to r
+#4.Sets the game logic
 
 def start_new_game():
     board_obj = Board()
@@ -65,45 +73,48 @@ def start_new_game():
         sr, sc = start
         er, ec = end
 
-        #Validate using wrapper is_valid_move (we added to GameLogic)
+        #Validate using is_valid_move
         valid, message = logic.is_valid_move(start, end, current_player)
         if not valid:
             print(f"{Color.RED}Invalid move: {message}{Color.RESET}")
             input("Press ENTER to continue...")
             continue
 
-        #Apply move by calling process_move (expects 4 ints)
+        #Apply move by calling process_move
         ok, msg, new_player = logic.process_move(sr, sc, er, ec)
         if not ok:
             print(f"{Color.RED}{msg}{Color.RESET}")
             input("Press ENTER to continue...")
             continue
 
-        # Successful move
+        #Successful move
         print(f"{Color.GREEN}{msg}{Color.RESET}")
         board_obj.print_board()
 
-        # Save automatically after a successful move if you want:
+        #Auto Save after a successful move
         fm.board_obj = board_obj
         fm.current_player = new_player
         fm.save_game()
 
-        # Update current player and logic
+        #Update current player and logic
         current_player = new_player
         logic.current_player = current_player
 
-        # Check game over: if opponent has no moves
+        #Checking Game Over
         opponent = 'b' if current_player == 'r' else 'r'
         if not logic.has_any_valid_moves(opponent):
-            print(f"\n{Color.GREEN}GAME OVER!!! Player {current_player.upper()} Wins!!{Color.RESET}")
+            print(f"\n{Color.RED}GAME OVER!!! Player {current_player.upper()} Wins!!{Color.RESET}")
             input("Press ENTER to return to menu...")
             break
 
-
+#1.Clears the screen
+#2.Loads the board saved earlier
+#3.Loads the current player turn
+#4.Starts the Game from the exact position leftover
+#5.Mostly same as start_new_game()
 
 
 def load_save_game():
-    # create a board and FileManager, then call load
     board_obj = Board()
     fm = FileManager(board_obj, 'r')
     loaded_board, loaded_turn = fm.load_game()
@@ -118,50 +129,62 @@ def load_save_game():
     print(f"{Color.CYAN}\n==================== SAVED GAME LOADED ===================={Color.RESET}")
     board_obj.print_board()
 
-    # then run the same loop as start_new_game but using loaded board
-    while True:
+    #Same as the start_new_game() mostly
+    while(2>1):
         print(f"\n{Color.BLUE}Player {current_player.upper()}'s turn{Color.RESET}")
+
         mv = user_move()
+
+        #Save Request
         if mv == 'save':
             fm.board_obj = board_obj
             fm.current_player = current_player
             fm.save_game()
             input("Press ENTER to continue...")
             continue
+
+        #Load Request
         if mv == 'load':
             print("Already loaded.")
             input("Press ENTER to continue...")
             continue
 
+        #Normal Move
         start, end = mv
         sr, sc = start
         er, ec = end
 
+        #Validate using is_valid_move()
         valid, message = logic.is_valid_move(start, end, current_player)
         if not valid:
             print(f"{Color.RED}Invalid move: {message}{Color.RESET}")
             input("Press ENTER to continue...")
             continue
 
+        #Apply move by calling process_move
         ok, msg, new_player = logic.process_move(sr, sc, er, ec)
         if not ok:
             print(f"{Color.RED}{msg}{Color.RESET}")
             input("Press ENTER to continue...")
             continue
 
+        #Successful move
         print(f"{Color.GREEN}{msg}{Color.RESET}")
         board_obj.print_board()
 
+        #Auto Save after a successful move
         fm.board_obj = board_obj
         fm.current_player = new_player
         fm.save_game()
 
+        #Update current player and logic
         current_player = new_player
         logic.current_player = current_player
 
+        #Checking Game Over
         opponent = 'b' if current_player == 'r' else 'r'
         if not logic.has_any_valid_moves(opponent):
-            print(f"\n{Color.GREEN}GAME OVER! Player {current_player.upper()} wins!{Color.RESET}")
+            print(f"\n{Color.GREEN}GAME OVER!!! Player {current_player.upper()} Wins!!{Color.RESET}")
             input("Press ENTER to return to menu...")
             break
 
