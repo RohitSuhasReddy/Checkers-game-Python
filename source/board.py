@@ -10,9 +10,9 @@ class Board:
     # -*- Initial board set-up -*-
     def create_initial_board(self):
         """
-        r = red man
+        r = red coin
         R = red king
-        b = black man
+        b = black coin
         B = black king
         . = empty
         """
@@ -35,7 +35,7 @@ class Board:
     # -*-Numbering the rows and cols.-*-
     def print_board(self):
         print("\n     1   2   3   4   5   6   7   8")
-         #-*- Good looking board with corne walls.-*-
+         #-*- Good looking board with proper borders.-*-
         print("    ---------------------------------")
 
         for row in range(8):
