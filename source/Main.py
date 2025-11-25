@@ -74,6 +74,10 @@ def start_new_game():
         er, ec = end
 
         #Validate using is_valid_move
+                #Ensures that the squares are well within the boundaries.
+                #Checks if the player is moving their own piece or not.
+                #Checks mandatory capture rule.
+                #Checks for capture is feasible or not, if not then normal move.
         valid, message = logic.is_valid_move(start, end, current_player)
         if not valid:
             print(f"{Color.RED}Invalid move: {message}{Color.RESET}")
@@ -81,6 +85,9 @@ def start_new_game():
             continue
 
         #Apply move by calling process_move
+                #Validates the move,
+                #Applies it.
+                #Switches the turn.
         ok, msg, new_player = logic.process_move(sr, sc, er, ec)
         if not ok:
             print(f"{Color.RED}{msg}{Color.RESET}")
